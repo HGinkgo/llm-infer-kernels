@@ -25,8 +25,6 @@ Makefile
 *.qdrep
 *.nsys-rep
 *.ncu-rep
-benchmarks/results/*
-!benchmarks/results/.gitkeep
 
 # Python
 __pycache__/

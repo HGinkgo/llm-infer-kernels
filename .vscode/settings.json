@@ -1,0 +1,45 @@
+{
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "[c]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools",
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4
+    },
+    "[cpp]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools",
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4
+    },
+    "[cuda-cpp]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools",
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4
+    },
+    "[python]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4
+    },
+    "C_Cpp.formatting": "clangFormat",
+    "C_Cpp.clang_format_path": "/usr/bin/clang-format-20",
+    "C_Cpp.clang_format_style": "{ BasedOnStyle: LLVM, IndentWidth: 4, TabWidth: 4, UseTab: Never, ColumnLimit: 100, AllowShortFunctionsOnASingleLine: Empty, BreakTemplateDeclarations: Yes, PointerAlignment: Left, ReferenceAlignment: Left }",
+    "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: LLVM, IndentWidth: 4, TabWidth: 4, UseTab: Never, ColumnLimit: 100, AllowShortFunctionsOnASingleLine: Empty, BreakTemplateDeclarations: Yes, PointerAlignment: Left, ReferenceAlignment: Left }",
+    "clang-format.executable": "/usr/bin/clang-format-20",
+    "clang-format.style": "file",
+    "C_Cpp.default.compilerPath": "/usr/local/cuda/bin/nvcc",
+    "C_Cpp.default.includePath": [
+        "${workspaceFolder}/**",
+        "/usr/local/cuda/include",
+        "/usr/local/cuda/targets/x86_64-linux/include"
+    ],
+    "C_Cpp.default.defines": [
+        "__CUDACC__"
+    ],
+    "C_Cpp.default.cppStandard": "c++17",
+    "C_Cpp.default.intelliSenseMode": "linux-gcc-x64",
+    "files.associations": {
+        "*.cu": "cuda-cpp",
+        "*.cuh": "cuda-cpp"
+    }
+}

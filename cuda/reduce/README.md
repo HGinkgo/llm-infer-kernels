@@ -67,3 +67,13 @@ Profile example:
 ```bash
 ncu --set full ./build/bin/sum_reduce_sum
 ```
+
+## Benchmark
+
+For each version, keep these fields:
+
+```text
+time(ms) | bandwidth(GB/s) | speedup | correctness
+```
+
+Speedup is measured against the baseline version in the same executable.
