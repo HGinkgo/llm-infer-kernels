@@ -30,10 +30,11 @@ v4: 在 N 为 4 的倍数且指针 16-byte 对齐时使用 float4 读写；
 
 ## 复现
 
+以下命令从仓库根目录执行：
+
 ```bash
-cd /root/hpf/workspace/cuda/llm-infer-kernels/cuda/reduce
-cmake -S . -B cmake-build-current -DCMAKE_BUILD_TYPE=Release -DCMAKE_CUDA_ARCHITECTURES=86
-cmake --build cmake-build-current -j
-./cmake-build-current/bin/softmax_matrix_softmax_matrix
-compute-sanitizer --tool memcheck ./cmake-build-current/bin/softmax_matrix_softmax_matrix
+cmake -S cuda -B build/cuda -DCMAKE_BUILD_TYPE=Release -DCMAKE_CUDA_ARCHITECTURES=86
+cmake --build build/cuda -j
+./build/cuda/bin/softmax_matrix_softmax_matrix
+compute-sanitizer --tool memcheck ./build/cuda/bin/softmax_matrix_softmax_matrix
 ```

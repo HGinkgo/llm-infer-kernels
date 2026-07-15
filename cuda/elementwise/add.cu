@@ -1,12 +1,11 @@
 
 #include <cuda_runtime.h>
 
+#include "cuda_utils.cuh"
+#include "utils.cuh"
 #include <cmath>
 #include <cstdio>
 #include <cstdlib>
-
-#include "cuda_utils.cuh"
-#include "utils.cuh"
 
 __global__ void elementwise_add_v1(const float* a, const float* b, float* c, int n) {
     int idx = blockIdx.x * blockDim.x + threadIdx.x;

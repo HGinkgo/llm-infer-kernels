@@ -26,9 +26,10 @@ v3: float4 向量化访问完整四元素块，标量路径处理尾部
 
 ## 复现
 
+以下命令从仓库根目录执行：
+
 ```bash
-cd /root/hpf/workspace/cuda/llm-infer-kernels/cuda/elementwise
-cmake -S . -B cmake-build-current -DCMAKE_BUILD_TYPE=Release -DCMAKE_CUDA_ARCHITECTURES=86
-cmake --build cmake-build-current -j
-./cmake-build-current/bin/elementwise_add
+cmake -S cuda -B build/cuda -DCMAKE_BUILD_TYPE=Release -DCMAKE_CUDA_ARCHITECTURES=86
+cmake --build build/cuda -j
+./build/cuda/bin/elementwise_add
 ```

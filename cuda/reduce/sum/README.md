@@ -28,9 +28,10 @@ v4: 每线程四个元素，结合 warp shuffle 与尾部处理
 
 ## 复现
 
+以下命令从仓库根目录执行：
+
 ```bash
-cd /root/hpf/workspace/cuda/llm-infer-kernels/cuda/reduce
-cmake -S . -B cmake-build-current -DCMAKE_BUILD_TYPE=Release -DCMAKE_CUDA_ARCHITECTURES=86
-cmake --build cmake-build-current -j
-./cmake-build-current/bin/sum_reduce_sum
+cmake -S cuda -B build/cuda -DCMAKE_BUILD_TYPE=Release -DCMAKE_CUDA_ARCHITECTURES=86
+cmake --build build/cuda -j
+./build/cuda/bin/sum_reduce_sum
 ```

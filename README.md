@@ -1,79 +1,68 @@
 # llm-infer-kernels
 
-CUDA and Triton operator kernels for LLM inference experiments.
+面向 LLM 推理的 CUDA/Triton 算子学习仓库，记录从基础实现到性能优化的演进过程。
+当前主要在 RTX 3090（`sm_86`）上开发和测试，不以生产环境直接使用为目标。
 
-## Layout
+## 目录
 
-- `cuda/`: CUDA kernel implementations grouped by operator.
-- `triton/`: Triton implementations grouped by operator.
+- `cuda/`：按算子分类的 CUDA 实现。
+- `triton/`：Triton 学习目录，目前为占位内容。
 
-## Organization
+已完成的算子在各自目录中保留核函数、CPU 正确性参考、benchmark 主程序和优化记录。
 
-This repository follows an operator-first layout similar to small CUDA learning
-repos:
+## 算子状态
 
-```text
-cuda/
-├── common/
-├── reduce/
-│   ├── README.md
-│   ├── CMakeLists.txt
-│   ├── build.sh
-│   ├── sum/
-│   │   ├── README.md
-│   │   └── reduce_sum.cu
-│   ├── max/
-│   │   ├── README.md
-│   │   └── reduce_max.cu
-│   ├── softmax/
-│   │   ├── README.md
-│   │   └── softmax.cu
-│   └── softmax_matrix/
-│       ├── README.md
-│       └── softmax_matrix.cu
-├── rmsnorm/
-├── rope/
-├── gemv/
-├── sgemm/
-└── flash_attention/
-```
+| 类别 | 算子 | 状态 |
+| --- | --- | --- |
+| CUDA Reduce | Sum、Max、1D Softmax、Matrix Softmax | 已完成 |
+| CUDA Elementwise | Add | 已完成 |
+| CUDA Memory | Matrix Transpose | 已完成 |
+| CUDA Normalization | RMSNorm | 已完成 v1-v4 |
+| CUDA Normalization | LayerNorm | 待实现 |
+| CUDA LLM | RoPE、GEMV、SGEMM、FlashAttention | 待实现 |
+| Triton | RMSNorm、RoPE、FlashAttention | 待实现 |
 
-Each operator keeps its own:
+## 环境要求
 
-- implementation versions
-- `main()` for correctness and local benchmarking
-- README notes for optimization records
+- CUDA Toolkit，包含 `nvcc`
+- CMake 3.24 或更高版本
+- 支持目标 CUDA 架构的 NVIDIA GPU
 
-There is no shared top-level `benchmarks/` or `docs/` directory. Benchmark logic
-stays next to each operator.
+CUDA CMake 默认使用 `CMAKE_CUDA_ARCHITECTURES=86`，对应 RTX 3090。其他 GPU
+可以在配置时通过 `-DCMAKE_CUDA_ARCHITECTURES=<arch>` 覆盖。
 
-## Requirements
+## 构建
 
-- CUDA Toolkit with `nvcc`
-- CMake 3.24 or newer
-- NVIDIA GPU supported by the selected CUDA architecture
-
-The CUDA CMake files currently default to `CMAKE_CUDA_ARCHITECTURES=86`, which
-matches RTX 3090. Change that value when building for a different GPU.
-
-## Build
-
-Each CUDA operator directory owns its local build entry. For example:
+以下命令均从仓库根目录执行。
 
 ```bash
-cd cuda/reduce
-./build.sh
-./build/bin/sum_reduce_sum
+cmake -S cuda -B build/cuda -DCMAKE_BUILD_TYPE=Release
+cmake --build build/cuda -j
 ```
 
-## Code Style
+所有已完成的 CUDA 算子都会输出到同一个目录：
 
-- `.clang-format` defines the C/C++/CUDA formatting rules.
-- `.editorconfig` defines basic editor behavior such as 4-space indentation,
-  LF line endings, and final newlines.
-- `.vscode/settings.json` only keeps repository-generic editor settings and
-  intentionally avoids machine-specific absolute paths.
+```bash
+./build/cuda/bin/sum_reduce_sum
+./build/cuda/bin/max_reduce_max
+./build/cuda/bin/softmax_softmax
+./build/cuda/bin/softmax_matrix_softmax_matrix
+./build/cuda/bin/elementwise_add
+./build/cuda/bin/transpose
+./build/cuda/bin/rmsnorm
+```
+
+## 性能记录
+
+已完成算子的 README 记录优化路径、测试 shape、正确性与性能结果。性能数据来自特定硬件和
+软件环境，仅用于观察同一算子不同版本的相对变化；短 kernel 的绝对耗时会受到 GPU 时钟和
+系统负载影响。
+
+## 代码风格
+
+- `.clang-format` 定义 C/C++/CUDA 格式，使用 4 空格缩进。
+- `.editorconfig` 定义 LF 换行、文件末尾换行等基础编辑器行为。
 
 ## License
 
-This project is licensed under the MIT License. See `LICENSE` for details.
+本项目使用 MIT License，详见 `LICENSE`。

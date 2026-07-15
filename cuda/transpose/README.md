@@ -28,10 +28,11 @@ v4: 32 x 8 block，每线程循环搬运 4 行，降低 block 线程数
 
 ## 复现
 
+以下命令从仓库根目录执行：
+
 ```bash
-cd /root/hpf/workspace/cuda/llm-infer-kernels
-nvcc -std=c++17 -O3 -lineinfo -arch=sm_86 -I cuda/common \\
-    cuda/transpose/transpose.cu -o /tmp/transpose
-/tmp/transpose
-compute-sanitizer --tool memcheck /tmp/transpose
+cmake -S cuda -B build/cuda -DCMAKE_BUILD_TYPE=Release -DCMAKE_CUDA_ARCHITECTURES=86
+cmake --build build/cuda -j
+./build/cuda/bin/transpose
+compute-sanitizer --tool memcheck ./build/cuda/bin/transpose
 ```

@@ -23,9 +23,10 @@ v4: 每线程加载四个元素；shared memory 完成跨 warp 前归约；
 
 ## 复现
 
+以下命令从仓库根目录执行：
+
 ```bash
-cd /root/hpf/workspace/cuda/llm-infer-kernels/cuda/reduce
-cmake -S . -B cmake-build-current -DCMAKE_BUILD_TYPE=Release -DCMAKE_CUDA_ARCHITECTURES=86
-cmake --build cmake-build-current -j
-./cmake-build-current/bin/max_reduce_max
+cmake -S cuda -B build/cuda -DCMAKE_BUILD_TYPE=Release -DCMAKE_CUDA_ARCHITECTURES=86
+cmake --build build/cuda -j
+./build/cuda/bin/max_reduce_max
 ```

@@ -24,9 +24,10 @@ v2: 每线程处理多个元素；max/sum 保留在寄存器；
 
 ## 复现
 
+以下命令从仓库根目录执行：
+
 ```bash
-cd /root/hpf/workspace/cuda/llm-infer-kernels/cuda/reduce
-cmake -S . -B cmake-build-current -DCMAKE_BUILD_TYPE=Release -DCMAKE_CUDA_ARCHITECTURES=86
-cmake --build cmake-build-current -j
-./cmake-build-current/bin/softmax_softmax
+cmake -S cuda -B build/cuda -DCMAKE_BUILD_TYPE=Release -DCMAKE_CUDA_ARCHITECTURES=86
+cmake --build build/cuda -j
+./build/cuda/bin/softmax_softmax
 ```
