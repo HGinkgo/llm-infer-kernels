@@ -43,3 +43,4 @@ add_cuda_executable(softmax_matrix_softmax_matrix reduce/softmax_matrix/softmax_
 add_cuda_executable(elementwise_add elementwise/add.cu)
 add_cuda_executable(transpose transpose/transpose.cu)
 add_cuda_executable(rmsnorm rmsnorm/rmsnorm.cu)
+add_cuda_executable(layernorm layernorm/layernorm.cu)

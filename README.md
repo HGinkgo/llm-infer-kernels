@@ -18,7 +18,7 @@
 | CUDA Elementwise | Add | 已完成 |
 | CUDA Memory | Matrix Transpose | 已完成 |
 | CUDA Normalization | RMSNorm | 已完成 v1-v4 |
-| CUDA Normalization | LayerNorm | 待实现 |
+| CUDA Normalization | LayerNorm | 已完成 v1-v4 |
 | CUDA LLM | RoPE、GEMV、SGEMM、FlashAttention | 待实现 |
 | Triton | RMSNorm、RoPE、FlashAttention | 待实现 |
 
@@ -50,6 +50,7 @@ cmake --build build/cuda -j
 ./build/cuda/bin/elementwise_add
 ./build/cuda/bin/transpose
 ./build/cuda/bin/rmsnorm
+./build/cuda/bin/layernorm
 ```
 
 ## 性能记录
